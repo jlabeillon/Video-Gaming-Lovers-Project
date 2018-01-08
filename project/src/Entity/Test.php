@@ -18,17 +18,17 @@ class Test
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
      private $title;
 
      /**
-      * @ORM\Column(type="integer")
+      * @ORM\Column(type="string")
       */
       private $content;
 
       /**
-       * @ORM\Column(type="integer")
+       * @ORM\Column(type="string")
        */
        private $thumbnail;
 
@@ -39,11 +39,13 @@ class Test
 
         /**
          * @ORM\OneToMany(targetEntity="Comment", mappedBy="test", cascade={"persist", "remove"})
+         * @ORM\Column(nullable=true)
          */
          private $comment;
 
          /**
           * @ORM\ManyToOne(targetEntity="User", inversedBy="test")
+          * @ORM\Column(nullable=true)
           */
           private $author;
 

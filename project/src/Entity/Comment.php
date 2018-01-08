@@ -31,24 +31,28 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comment")
+     * @ORM\Column(nullable=true)
      */
     private $author;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Topic", inversedBy="comment")
+     * @ORM\Column(nullable=true)
      */
     private $topic;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="comment")
+     * @ORM\Column(nullable=true)
      */
     private $article;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Test", inversedBy="comment")
+     * @ORM\Column(nullable=true)
      */
     private $test;
 
@@ -163,4 +167,3 @@ class Comment
 
 
 }
-

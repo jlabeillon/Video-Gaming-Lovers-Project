@@ -18,27 +18,27 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
      private $username;
 
      /**
-      * @ORM\Column(type="integer")
+      * @ORM\Column(type="string")
       */
      private $email;
 
      /**
-      * @ORM\Column(type="integer")
+      * @ORM\Column(type="string")
       */
     private $password;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $role;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $picture;
 
@@ -49,21 +49,25 @@ class User
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="author", cascade={"persist", "remove"})
+     * @ORM\Column(nullable=true)
      */
     private $comment;
 
     /**
      * @ORM\OneToMany(targetEntity="Test", mappedBy="author", cascade={"persist", "remove"})
+     * @ORM\Column(nullable=true)
      */
     private $test;
 
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="author", cascade={"persist", "remove"})
+     * @ORM\Column(nullable=true)
      */
     private $article;
 
     /**
      * @ORM\OneToMany(targetEntity="Topic", mappedBy="author", cascade={"persist", "remove"})
+     * @ORM\Column(nullable=true)
      */
     private $topic;
 

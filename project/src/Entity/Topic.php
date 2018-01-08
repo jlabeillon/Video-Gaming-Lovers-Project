@@ -32,12 +32,14 @@ class Topic
   private $date;
 /**
    * @ORM\ManyToOne(targetEntity="User", inversedBy="topic")
+   * @ORM\Column(nullable=true)
    */
   private $author;
 
 
   /**
    * @ORM\OneToMany(targetEntity="Comment", mappedBy="topic", cascade={"persist", "remove"})
+   * @ORM\Column(nullable=true)
    */
   private $comment;
 

@@ -18,6 +18,7 @@ class Picture
 
     /**
     * @ORM\ManyToOne(targetEntity="Game", inversedBy="image")
+    * @ORM\Column(nullable=true)
     */
     private $game;
 

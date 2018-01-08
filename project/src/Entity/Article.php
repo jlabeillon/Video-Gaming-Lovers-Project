@@ -46,12 +46,14 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="article")
+     * @ORM\Column(nullable=true)
      */
     private $author;
 
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"persist", "remove"})
+     * @ORM\Column(nullable=true)
      */
     private $comment;
 
