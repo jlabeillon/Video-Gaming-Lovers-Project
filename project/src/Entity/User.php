@@ -47,22 +47,22 @@ class User
     private $date;
 
     /**
-     * @OneToMany(targetEntity="Comment", mappedBy="author")
+     * @OneToMany(targetEntity="Comment", mappedBy="author", cascade={"persist", "remove"})
      */
     private $comment:
 
     /**
-     * OneToMany(targetEntity="Test", mappedBy="author")
+     * OneToMany(targetEntity="Test", mappedBy="author", cascade={"persist", "remove"})
      */
     private $test;
 
     /**
-     * @OneToMany(targetEntity="Article", mappedBy="author")
+     * @OneToMany(targetEntity="Article", mappedBy="author", cascade={"persist", "remove"})
      */
     private $article;
 
     /**
-     * @OneToMany(targetEntity="Topic", mappedBy="authot")
+     * @OneToMany(targetEntity="Topic", mappedBy="authot", cascade={"persist", "remove"})
      */
     private $topic;
 
