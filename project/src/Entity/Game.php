@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
@@ -27,12 +28,12 @@ class Game
     private $info;
 
     /**
-     * @OneToOne(targetEntity="Test")
+     * @ORM\OneToOne(targetEntity="Test")
      */
      private $test;
 
      /**
-     * @OneToMany(targetEntity="Picture", mappedBy="game")
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="game", cascade={"persist", "remove"})
      */
      private $image;
 

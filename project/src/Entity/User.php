@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -47,22 +48,22 @@ class User
     private $date;
 
     /**
-     * @OneToMany(targetEntity="Comment", mappedBy="author", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="author", cascade={"persist", "remove"})
      */
-    private $comment:
+    private $comment;
 
     /**
-     * OneToMany(targetEntity="Test", mappedBy="author", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Test", mappedBy="author", cascade={"persist", "remove"})
      */
     private $test;
 
     /**
-     * @OneToMany(targetEntity="Article", mappedBy="author", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="author", cascade={"persist", "remove"})
      */
     private $article;
 
     /**
-     * @OneToMany(targetEntity="Topic", mappedBy="authot", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Topic", mappedBy="author", cascade={"persist", "remove"})
      */
     private $topic;
 

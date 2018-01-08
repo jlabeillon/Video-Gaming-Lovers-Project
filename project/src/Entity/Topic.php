@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TopicRepository")
@@ -36,7 +37,7 @@ class Topic
 
 
   /**
-   * @ORM\OneToMany(targetEntity="Comment", mappedBy="topic")
+   * @ORM\OneToMany(targetEntity="Comment", mappedBy="topic", cascade={"persist", "remove"})
    */
   private $comment;
 

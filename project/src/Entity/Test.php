@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TestRepository")
@@ -22,7 +23,7 @@ class Test
      private $title;
 
      /**
-      * @ORM\Column(tye="integer")
+      * @ORM\Column(type="integer")
       */
       private $content;
 
@@ -37,12 +38,12 @@ class Test
         private $date;
 
         /**
-         * @OneToMany(targetEntity="Comment", mappedBy="test")
+         * @ORM\OneToMany(targetEntity="Comment", mappedBy="test", cascade={"persist", "remove"})
          */
          private $comment;
 
          /**
-          * @ManyToOne(targetEntity="User", inversedBy="Test")
+          * @ORM\ManyToOne(targetEntity="User", inversedBy="test")
           */
           private $author;
 
@@ -53,7 +54,7 @@ class Test
 
           public function getId()
           {
-            return $this->id
+            return $this->id;
           }
 
           public function getTitle()
