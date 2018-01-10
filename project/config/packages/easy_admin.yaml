@@ -1,10 +1,18 @@
 easy_admin:
+    site_name: 'Video Gaming Lovers'
+    
     entities:
-        # List the entity class name you want to manage
-        - App\Entity\Article
-        - App\Entity\Comment
-        - App\Entity\Game
-        - App\Entity\Picture
-        - App\Entity\Test
-        - App\Entity\Topic
-        - App\Entity\User
+      Article:
+        class: App\Entity\Article
+      Comment:
+        class: App\Entity\Comment
+      Game:
+        class: App\Entity\Game
+      Picture:
+        class: App\Entity\Picture
+      Test:
+        class: App\Entity\Test
+      Topic:
+        class: App\Entity\Topic
+      User:
+        class: App\Entity\User

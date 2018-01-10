@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class HomeController
+class HomeController extends Controller
 
 {
     public function home()
     {
-        return new Response('<html><body>Hello World !</body>');
+        return $this->render('home/home.html.twig');
     }
 }
