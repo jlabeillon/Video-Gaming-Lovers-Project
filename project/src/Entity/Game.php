@@ -29,13 +29,11 @@ class Game
 
     /**
      * @ORM\OneToOne(targetEntity="Test")
-     * @ORM\Column(nullable=true)
      */
      private $test;
 
      /**
-     * @ORM\OneToMany(targetEntity="Picture", mappedBy="game", cascade={"persist", "remove"})
-     * @ORM\Column(nullable=true)
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="game", cascade={"remove"})
      */
      private $image;
 

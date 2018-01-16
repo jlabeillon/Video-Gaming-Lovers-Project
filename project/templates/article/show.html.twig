@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="card">
+  <div class="card-header">
+    {{ article.title }}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{ article.content }}</p>
+    </blockquote>
+  </div>
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item list-group-item-primary">Checkout the comments :</li>
+  {% for comments in comment %}
+    <li class="list-group-item">{{ comments.content }}</li>
+    <li class="list-group-item lead">
+        {% if comments.author == null %}
+        By Anonymous
+        {% else %}
+        By {{ comments.author }}
+        {% endif %}
+      </li>
+   {% endfor %}
+</ul>
+
+{% endblock %}

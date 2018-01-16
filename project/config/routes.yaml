@@ -1,3 +1,15 @@
 home_page:
   path: /
   controller: App\Controller\HomeController::home
+article_page:
+  path: /article/{id}
+  controller: App\Controller\ArticleController::show
+  methods:   [GET]
+  requirements:
+    id: '\d+'
+admin_page:
+  path: /admin
+  controller: App\Controller\AdminController::admin
+register_page:
+  path: /register
+  controller: App\Controller\UserController::register

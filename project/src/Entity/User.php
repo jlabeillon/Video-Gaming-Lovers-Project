@@ -4,11 +4,16 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -19,57 +24,63 @@ class User
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
      private $username;
 
      /**
       * @ORM\Column(type="string")
+      * @Assert\NotBlank()
+     * @Assert\Email()
       */
      private $email;
 
      /**
-      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+     /**
+      * @ORM\Column(type="string", length=64)
       */
     private $password;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    private $role;
-
-    /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $picture;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="author", cascade={"persist", "remove"})
-     * @ORM\Column(nullable=true)
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="author", cascade={"remove"})
      */
     private $comment;
 
     /**
-     * @ORM\OneToMany(targetEntity="Test", mappedBy="author", cascade={"persist", "remove"})
-     * @ORM\Column(nullable=true)
+     * @ORM\OneToMany(targetEntity="Test", mappedBy="author", cascade={"remove"})
      */
     private $test;
 
     /**
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="author", cascade={"persist", "remove"})
-     * @ORM\Column(nullable=true)
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="author", cascade={"remove"})
      */
     private $article;
 
     /**
-     * @ORM\OneToMany(targetEntity="Topic", mappedBy="author", cascade={"persist", "remove"})
-     * @ORM\Column(nullable=true)
+     * @ORM\OneToMany(targetEntity="Topic", mappedBy="author", cascade={"remove"})
      */
     private $topic;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
 
     public function __construct()
     {
@@ -77,6 +88,8 @@ class User
       $this->test = new ArrayCollection();
       $this->article = new ArrayCollection();
       $this->topic = new ArrayCollection();
+      $this->isActive = true;
+      $this->salt = md5(uniqid('', true));
     }
 
 
@@ -120,6 +133,16 @@ class User
         $this->email = $email;
     }
 
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+
+    }
     /**
      * @return mixed
      */
@@ -224,7 +247,39 @@ class User
       return $this->topic[] = $topic;
     }
 
+    public function getSalt()
+    {
+
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+
+        ) = unserialize($serialized);
+    }
 
 
-    // add your own fields
 }

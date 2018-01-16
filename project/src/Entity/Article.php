@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @ORM\Table(name="article")
  */
 class Article
 {
@@ -23,7 +24,7 @@ class Article
     private $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $content;
 
@@ -46,14 +47,12 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="article")
-     * @ORM\Column(nullable=true)
      */
     private $author;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"persist", "remove"})
-     * @ORM\Column(nullable=true)
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"remove"})
      */
     private $comment;
 
@@ -163,7 +162,10 @@ class Article
     public function setAuthor($author)
     {
         $this->author = $author;
-        $author->addArticle($this);
+        if ($author != null) {
+          $author->addArticle($this);
+        }
+
     }
 
     /**
@@ -180,6 +182,8 @@ class Article
         $this->comment[] = $comment;
     }
 
-
+    public function __toString() {
+    return $this->getTitle();
+}
 
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
+ * @ORM\Table(name="comment")
  */
 class Comment
 {
@@ -24,35 +25,31 @@ class Comment
 
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $content;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comment")
-     * @ORM\Column(nullable=true)
      */
     private $author;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Topic", inversedBy="comment")
-     * @ORM\Column(nullable=true)
      */
     private $topic;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="comment")
-     * @ORM\Column(nullable=true)
      */
     private $article;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Test", inversedBy="comment")
-     * @ORM\Column(nullable=true)
      */
     private $test;
 
@@ -134,7 +131,10 @@ class Comment
     public function setAuthor($author): void
     {
         $this->author = $author;
-        $author->addComment($this);
+        if ($author != null) {
+          $author->addComment($this);
+        }
+
     }
 
     /**
@@ -143,7 +143,9 @@ class Comment
     public function setTopic($topic): void
     {
         $this->topic = $topic;
-        $topic->addComment($this);
+        if ($topic != null) {
+          $topic->addComment($this);
+        }
     }
 
     /**
@@ -152,7 +154,10 @@ class Comment
     public function setArticle($article): void
     {
         $this->article = $article;
-        $article->addComment($this);
+        if ($article != null) {
+          $article->addComment($this);
+        }
+
     }
 
     /**
@@ -161,7 +166,10 @@ class Comment
     public function setTest($test): void
     {
         $this->test = $test;
-        $test->addComment($this);
+        if ($test != null) {
+          $test->addComment($this);
+        }
+
     }
     // add your own fields
 

@@ -23,7 +23,7 @@ class Topic
   private $title;
 
   /**
-   * @ORM\Column(type="string")
+   * @ORM\Column(type="text")
    */
   private $content;
   /**
@@ -32,14 +32,12 @@ class Topic
   private $date;
 /**
    * @ORM\ManyToOne(targetEntity="User", inversedBy="topic")
-   * @ORM\Column(nullable=true)
    */
   private $author;
 
 
   /**
-   * @ORM\OneToMany(targetEntity="Comment", mappedBy="topic", cascade={"persist", "remove"})
-   * @ORM\Column(nullable=true)
+   * @ORM\OneToMany(targetEntity="Comment", mappedBy="topic", cascade={"remove"})
    */
   private $comment;
 
@@ -113,7 +111,10 @@ class Topic
   public function setAuthor($author)
   {
       $this->author = $author;
-      $author->addTopic($this);
+      if ($author != null) {
+        $author->addTopic($this);
+      }
+
   }
 /**
    * @return mixed

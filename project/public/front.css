@@ -1,3 +1,26 @@
+
+body {
+  font-family: 'Fredoka One', cursive;
+}
+
 .jumbotron{
   margin-bottom: 0%;
+  text-align: center;
+}
+.lead{
+  color: CornflowerBlue;
+}
+
+.navbar{
+  margin-bottom: 10px;
+}
+
+.nav-item{
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+
+.cards{
+  margin-bottom: 10px;
 }

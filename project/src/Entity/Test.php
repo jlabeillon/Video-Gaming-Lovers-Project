@@ -23,7 +23,7 @@ class Test
      private $title;
 
      /**
-      * @ORM\Column(type="string")
+      * @ORM\Column(type="text")
       */
       private $content;
 
@@ -38,14 +38,12 @@ class Test
         private $date;
 
         /**
-         * @ORM\OneToMany(targetEntity="Comment", mappedBy="test", cascade={"persist", "remove"})
-         * @ORM\Column(nullable=true)
+         * @ORM\OneToMany(targetEntity="Comment", mappedBy="test", cascade={"remove"})
          */
          private $comment;
 
          /**
           * @ORM\ManyToOne(targetEntity="User", inversedBy="test")
-          * @ORM\Column(nullable=true)
           */
           private $author;
 
@@ -129,7 +127,10 @@ class Test
           public function setAuthor($author)
           {
               $this->author = $author;
-              $author->addArticle($this);
+              if ($author != null) {
+                $author->addTest($this);
+              }
+
           }
 
           /**
